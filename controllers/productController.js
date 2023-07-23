@@ -1,6 +1,6 @@
 const productModel = require('../model/productModel');
 const ApiFeature = require('../utils/apiFeature');
-const ErrorHandler = require('../utils/errorHandler');
+
 
 
 //Create Product || POST ----> Admin
@@ -127,5 +127,9 @@ exports.getProdctDetails = async (req, res,next) => {
     } catch (err) {
         // Handle other errors
         //return next(new ErrorHandler("Internal Server Error",500)); // Pass the error to errorMiddleware
+        console.log(err);
+        res.status(404).send({
+            message:'product not found',
+        })
     }
 }
