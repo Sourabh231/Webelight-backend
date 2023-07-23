@@ -11,7 +11,7 @@ dotenv.config();
 const userRoutes = require('./routes/userRoute');
 const product = require('./routes/productRoute')
 
-const errorMiddleware = require('./middleware/error');
+;
 
 //mongodb connection
 connectDB();
@@ -23,8 +23,6 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-//middleware for Errors
-app.use(errorMiddleware);
 
 
 app.get('/',(req,res)=>{
