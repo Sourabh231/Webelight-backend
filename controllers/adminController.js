@@ -1,11 +1,11 @@
-const userModel = require('../model/userModel');
+const adminModel = require('../model/adminModel');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 
 exports.getAlladminuser = async(req,res)=>{
     try{
-        const user = await userModel.find({});
+        const user = await adminModel.find({});
         return res.status(201).send({
             sucess:true,
             userCount : user.length,
@@ -44,7 +44,7 @@ exports.adminregisterController = async (req, res) => {
         }
 
         //existing users
-        const existingUser = await userModel.findOne({email});
+        const existingUser = await adminModel.findOne({email});
         if(existingUser){
             return res.status(201).send({
                 sucess:false,
@@ -56,7 +56,7 @@ exports.adminregisterController = async (req, res) => {
         const hashPassword = await bcrypt.hash(password,10);
 
         //save the user
-        const user = new userModel({name,email,password:hashPassword,cpassword:hashPassword})
+        const user = new adminModel({name,email,password:hashPassword,cpassword:hashPassword})
         console.log(user);
         await user.save();
 
@@ -93,7 +93,7 @@ exports.adminloginController = async (req, res) => {
             })
           }
 
-          const user = await userModel.findOne({email});
+          const user = await adminModel.findOne({email});
           if(!user){
             return res.status(401).send({
                 sucess:false,
